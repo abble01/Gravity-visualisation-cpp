@@ -1,4 +1,10 @@
 ﻿.vs/
 x64/
 *.user
+<<<<<<< HEAD
 *.dll
+=======
+
+# SFML DLLs
+*.dll
+>>>>>>> 8e640b1dd6d7dd0013c3cfaa2ed81612fe0d6944
