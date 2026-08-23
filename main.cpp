@@ -2,7 +2,7 @@
 #include <optional>
 #include "UI.h"
 #include "Body.h"  
-
+#include <vector>
 
 int main() {
 	
@@ -11,8 +11,9 @@ int main() {
 		"Gravity Visualisation Project"
 		);
 
-	//USER INTERFACE
+	//OBJECTS
 	UI ui;
+	std::vector<Body> bodies;
 
 	//temp objects-------------
 	sf::CircleShape preview;
@@ -39,7 +40,18 @@ int main() {
 			{
 				if (placing && mouseButtonPressed->button == sf::Mouse::Button::Left)
 				{
+					sf::Vector2f position =
+						static_cast<sf::Vector2f>(mouseButtonPressed->position);
+
 					placing = false;
+					Body newBody(
+						position,
+						{ 0.f, 0.f },
+						1.f,          // temporary values
+						25.f
+					);
+					bodies.push_back(newBody);
+					
 				}
 
 				if (mouseButtonPressed->button == sf::Mouse::Button::Left &&
@@ -64,6 +76,11 @@ int main() {
 
 		if (placing) {
 			window.draw(preview);
+		}
+
+		for (Body& body : bodies)
+		{
+			body.draw(window);
 		}
 		
 		window.draw(ui.hud);
