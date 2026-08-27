@@ -4,6 +4,12 @@
 #include "Body.h"  
 #include <vector>
 
+// PROJECT CONSTS AND CONFIGS
+//const double METRES_PER_PIXEL = 500'000'000.0;
+const double G = 6.6743e-11;
+
+float gameSpeed = 1.0f;
+
 int main() {
 	
 	sf::RenderWindow window(
@@ -40,18 +46,26 @@ int main() {
 			{
 				if (placing && mouseButtonPressed->button == sf::Mouse::Button::Left)
 				{
-					sf::Vector2f position =
-						static_cast<sf::Vector2f>(mouseButtonPressed->position);
+					sf::Vector2<double> position = {
+						static_cast<double>(mouseButtonPressed->position.x) * METRES_PER_PIXEL,
+						static_cast<double>(mouseButtonPressed->position.y) * METRES_PER_PIXEL
+					};
 
 					placing = false;
 					Body newBody(
 						position,
-						{ 0.f, 0.f },
+						{ 0, 0},
 						1.f,          // temporary values
-						25.f
+						67e6,
+						15
 					);
 					bodies.push_back(newBody);
-					
+
+					preview.setRadius(static_cast<float>(bodies.back().getVisualRadius()));
+					preview.setOrigin({
+							static_cast<float>(bodies.back().getVisualRadius()),
+							static_cast<float>(bodies.back().getVisualRadius())
+						});
 				}
 
 				if (mouseButtonPressed->button == sf::Mouse::Button::Left &&
