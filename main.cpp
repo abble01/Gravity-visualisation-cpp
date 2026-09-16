@@ -3,12 +3,13 @@
 #include "UI.h"
 #include "Body.h"  
 #include <vector>
+#include "Physics.h"
 
 // PROJECT CONSTS AND CONFIGS
 //const double METRES_PER_PIXEL = 500'000'000.0;
 const double G = 6.6743e-11;
 
-float gameSpeed = 1.0f;
+double gameSpeed = 86'400;
 
 int main() {
 	
@@ -16,10 +17,12 @@ int main() {
 		sf::VideoMode({1366,768}),
 		"Gravity Visualisation Project"
 		);
+	sf::Clock clock;
 
 	//OBJECTS
 	UI ui;
 	std::vector<Body> bodies;
+	Physics physics;
 
 	//temp objects-------------
 	sf::CircleShape preview;
@@ -32,8 +35,8 @@ int main() {
 	bool placing = false;
 	while (window.isOpen())
 	{
-
-		//EVENTS
+		double dt = clock.restart().asSeconds() * gameSpeed;
+		//EVENTS /
 		while (const std::optional event = window.pollEvent())
 		{
 
@@ -53,8 +56,9 @@ int main() {
 
 					placing = false;
 					Body newBody(
+						"Test",
 						position,
-						{ 0, 0},
+						{ 100'000.0, 0.0 },
 						1.f,          // temporary values
 						67e6,
 						15
@@ -94,9 +98,12 @@ int main() {
 
 		for (Body& body : bodies)
 		{
+			body.updatePosition(dt);
 			body.draw(window);
 		}
+
 		
+		physics.update(bodies, dt);
 		window.draw(ui.hud);
 		window.draw(ui.earthButton);
 		window.display();

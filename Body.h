@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 
 const double METRES_PER_PIXEL = 500'000'000.0;
+
+
+
 class Body
 {
 	// main planet class
@@ -16,6 +19,7 @@ private:
 	double m_visualRadius;
 public:
 	Body(
+		std::string name,
 		sf::Vector2<double> position,
 		sf::Vector2<double> velocity,
 		double mass, // kg
@@ -59,14 +63,35 @@ public:
 		window.draw(shape);
 	}
 
-	void update(double dt) 
-	{
-		m_position += m_velocity * dt;
-	}
 
 	double getVisualRadius() const
 	{
 		return m_visualRadius;
+	}
+
+	const sf::Vector2<double>& getPosition() const
+	{
+		return m_position;
+	}
+
+	const sf::Vector2<double>& getVelocity() const
+	{
+		return m_velocity;
+	}
+
+	double getMass() const
+	{
+		return m_mass;
+	}
+
+	void applyAcceleration(const sf::Vector2<double>& acceleration, double dt)
+	{
+		m_velocity += acceleration * dt;
+	}
+
+	void updatePosition(double dt)
+	{
+		m_position += m_velocity * dt;
 	}
 
 };
