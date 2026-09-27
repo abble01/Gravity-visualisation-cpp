@@ -7,7 +7,7 @@
 
 // PROJECT CONSTS AND CONFIGS
 //const double METRES_PER_PIXEL = 500'000'000.0;
-const double G = 6.6743e-11;
+//const double G = 6.6743e-11;
 
 double gameSpeed = 86'400;
 
