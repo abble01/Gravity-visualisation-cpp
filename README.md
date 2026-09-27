@@ -3,6 +3,7 @@
 This is my long-term Physics for Year 12. The goal is to build a gravity simulator that models how planets and stars pull on each other. 
 
 I originally built a prototype of this in Python, but I am rewriting it in C++ to make it run much faster and handle way more objects at the same time.
+More detailed processes at [The DevLog](devlog.md)
 
 ## Project Files
 
