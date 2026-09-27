@@ -7,6 +7,7 @@
  Then, I define the distance squared, and check if the dist is non zero to prevent the sim breaking.
  I next get define the regular distance and Normalise the direction vector by dividing the displacement by distance (The modulus of the displacement). Next, we calculate the acceleration.
 
+($i$ is the Body from the outside loop, $j$ is the body from the inner loop
 Newtonian gravity is 
 
 $F = G \frac{m_1 m_2}{r^2}$
