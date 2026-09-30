@@ -51,4 +51,11 @@ $$
 \hat{r}_{i \rightarrow j}
 $$
 
+Or 
+
+$$
+\vec{a}_i =
+\frac{G m_j (\vec{r}_j - \vec{r}_i)}{r^3}
+$$
+
 (note to self, multiplying by unit vector doesnt change the gravity strength, as it = 1, just tells us the direction)
