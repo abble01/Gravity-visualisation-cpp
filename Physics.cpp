@@ -21,7 +21,7 @@ void Physics::update(std::vector<Body>& bodies, double dt) {
            const double distsquared = displacement.x * displacement.x +
                displacement.y * displacement.y;
 
-           if (distsquared == 0) 
+           if (distsquared == 0.0) 
            {
                continue;
           
@@ -39,5 +39,14 @@ void Physics::update(std::vector<Body>& bodies, double dt) {
 
     }
 
+    for (std::size_t i = 0; i < bodies.size(); ++i) 
+    {
+        bodies[i].applyAcceleration(accelerations[i], dt);
+    }
+
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+    {
+        bodies[i].updatePosition(dt);
+    }
 
 }

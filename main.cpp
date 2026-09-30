@@ -9,7 +9,7 @@
 //const double METRES_PER_PIXEL = 500'000'000.0;
 //const double G = 6.6743e-11;
 
-double gameSpeed = 86'400;
+double gameSpeed = 86'400 * 40;
 
 int main() {
 	
@@ -55,15 +55,25 @@ int main() {
 					};
 
 					placing = false;
-					Body newBody(
-						"Test",
+					// SPAWNING A TEMPORARY SUN EARTH ORBIT PAIR
+					const double earthOrbitRadius = 149'597'870'700.0;
+					bodies.emplace_back(
+						"Sun",
 						position,
-						{ 100'000.0, 0.0 },
-						1.f,          // temporary values
-						67e6,
-						15
+						sf::Vector2<double>{0.0, 0.0},
+						1.989e30,
+						696'340'000.0,
+						35.0
 					);
-					bodies.push_back(newBody);
+
+					bodies.emplace_back(
+						"Earth",
+						position + sf::Vector2<double>{earthOrbitRadius, 0.0},
+						sf::Vector2<double>{0.0, -29'780.0},
+						5.972e24,
+						6'371'000.0,
+						8.0
+					);
 
 					preview.setRadius(static_cast<float>(bodies.back().getVisualRadius()));
 					preview.setOrigin({
@@ -83,14 +93,16 @@ int main() {
 		};
 
 		//PLACING LOGIC
-		if (placing) 
+		physics.update(bodies, dt);
+		window.clear();
+
+		if (placing)
 		{
 			sf::Vector2f m_pos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 			preview.setPosition(m_pos);
 		}
 
 
-		window.clear(); // can go at top of parent while
 
 		if (placing) {
 			window.draw(preview);
@@ -98,12 +110,11 @@ int main() {
 
 		for (Body& body : bodies)
 		{
-			body.updatePosition(dt);
 			body.draw(window);
 		}
 
 		
-		physics.update(bodies, dt);
+
 		window.draw(ui.hud);
 		window.draw(ui.earthButton);
 		window.display();
