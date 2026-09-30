@@ -12,7 +12,7 @@ void Physics::update(std::vector<Body>& bodies, double dt) {
         bodies.size(),
         {0.0, 0.0}
     );
-
+       // main gravity calculations
     for (std::size_t i = 0; i < bodies.size(); ++i)
     {
         for (std::size_t j = i + 1; j < bodies.size(); ++j)
