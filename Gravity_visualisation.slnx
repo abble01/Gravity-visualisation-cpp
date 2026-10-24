@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Gravity_visualisation.vcxproj" Id="a284281f-ce66-4ee1-953c-8443b30e5574" />
+</Solution>
